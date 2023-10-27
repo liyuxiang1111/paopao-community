@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dlu.liyuxiang.dao.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.dlu.liyuxiang.pojo.Message">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="sender_user_id" jdbcType="BIGINT" property="senderUserId" />
+    <result column="receiver_user_id" jdbcType="BIGINT" property="receiverUserId" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="breif" jdbcType="VARCHAR" property="breif" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="post_id" jdbcType="BIGINT" property="postId" />
+    <result column="comment_id" jdbcType="BIGINT" property="commentId" />
+    <result column="reply_id" jdbcType="BIGINT" property="replyId" />
+    <result column="is_read" jdbcType="TINYINT" property="isRead" />
+    <result column="created_on" jdbcType="BIGINT" property="createdOn" />
+    <result column="modified_on" jdbcType="BIGINT" property="modifiedOn" />
+    <result column="deleted_on" jdbcType="BIGINT" property="deletedOn" />
+    <result column="is_del" jdbcType="TINYINT" property="isDel" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, sender_user_id, receiver_user_id, type, breif, content, post_id, comment_id, 
+    reply_id, is_read, created_on, modified_on, deleted_on, is_del
+  </sql>
+<!--  <select id="selectByExample" parameterType="com.dlu.liyuxiang.pojo.MessageExample" resultMap="BaseResultMap">-->
+<!--    select-->
+<!--    <if test="distinct">-->
+<!--      distinct-->
+<!--    </if>-->
+<!--    <include refid="Base_Column_List" />-->
+<!--    from p_message-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Example_Where_Clause" />-->
+<!--    </if>-->
+<!--    <if test="orderByClause != null">-->
+<!--      order by ${orderByClause}-->
+<!--    </if>-->
+<!--  </select>-->
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from p_message
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from p_message
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+<!--  <delete id="deleteByExample" parameterType="com.dlu.liyuxiang.pojo.MessageExample">-->
+<!--    delete from p_message-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Example_Where_Clause" />-->
+<!--    </if>-->
+<!--  </delete>-->
+  <insert id="insert" parameterType="com.dlu.liyuxiang.pojo.Message">
+    insert into p_message (id, sender_user_id, receiver_user_id, 
+      type, breif, content, 
+      post_id, comment_id, reply_id, 
+      is_read, created_on, modified_on, 
+      deleted_on, is_del)
+    values (#{id,jdbcType=BIGINT}, #{senderUserId,jdbcType=BIGINT}, #{receiverUserId,jdbcType=BIGINT}, 
+      #{type,jdbcType=TINYINT}, #{breif,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{postId,jdbcType=BIGINT}, #{commentId,jdbcType=BIGINT}, #{replyId,jdbcType=BIGINT}, 
+      #{isRead,jdbcType=TINYINT}, #{createdOn,jdbcType=BIGINT}, #{modifiedOn,jdbcType=BIGINT}, 
+      #{deletedOn,jdbcType=BIGINT}, #{isDel,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dlu.liyuxiang.pojo.Message">
+    insert into p_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="senderUserId != null">
+        sender_user_id,
+      </if>
+      <if test="receiverUserId != null">
+        receiver_user_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="breif != null">
+        breif,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="postId != null">
+        post_id,
+      </if>
+      <if test="commentId != null">
+        comment_id,
+      </if>
+      <if test="replyId != null">
+        reply_id,
+      </if>
+      <if test="isRead != null">
+        is_read,
+      </if>
+      <if test="createdOn != null">
+        created_on,
+      </if>
+      <if test="modifiedOn != null">
+        modified_on,
+      </if>
+      <if test="deletedOn != null">
+        deleted_on,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="senderUserId != null">
+        #{senderUserId,jdbcType=BIGINT},
+      </if>
+      <if test="receiverUserId != null">
+        #{receiverUserId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="breif != null">
+        #{breif,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="postId != null">
+        #{postId,jdbcType=BIGINT},
+      </if>
+      <if test="commentId != null">
+        #{commentId,jdbcType=BIGINT},
+      </if>
+      <if test="replyId != null">
+        #{replyId,jdbcType=BIGINT},
+      </if>
+      <if test="isRead != null">
+        #{isRead,jdbcType=TINYINT},
+      </if>
+      <if test="createdOn != null">
+        #{createdOn,jdbcType=BIGINT},
+      </if>
+      <if test="modifiedOn != null">
+        #{modifiedOn,jdbcType=BIGINT},
+      </if>
+      <if test="deletedOn != null">
+        #{deletedOn,jdbcType=BIGINT},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+<!--  <select id="countByExample" parameterType="com.dlu.liyuxiang.pojo.MessageExample" resultType="java.lang.Long">-->
+<!--    select count(*) from p_message-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Example_Where_Clause" />-->
+<!--    </if>-->
+<!--  </select>-->
+<!--  <update id="updateByExampleSelective" parameterType="map">-->
+<!--    update p_message-->
+<!--    <set>-->
+<!--      <if test="record.id != null">-->
+<!--        id = #{record.id,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="record.senderUserId != null">-->
+<!--        sender_user_id = #{record.senderUserId,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="record.receiverUserId != null">-->
+<!--        receiver_user_id = #{record.receiverUserId,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="record.type != null">-->
+<!--        type = #{record.type,jdbcType=TINYINT},-->
+<!--      </if>-->
+<!--      <if test="record.breif != null">-->
+<!--        breif = #{record.breif,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.content != null">-->
+<!--        content = #{record.content,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.postId != null">-->
+<!--        post_id = #{record.postId,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="record.commentId != null">-->
+<!--        comment_id = #{record.commentId,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="record.replyId != null">-->
+<!--        reply_id = #{record.replyId,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="record.isRead != null">-->
+<!--        is_read = #{record.isRead,jdbcType=TINYINT},-->
+<!--      </if>-->
+<!--      <if test="record.createdOn != null">-->
+<!--        created_on = #{record.createdOn,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="record.modifiedOn != null">-->
+<!--        modified_on = #{record.modifiedOn,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="record.deletedOn != null">-->
+<!--        deleted_on = #{record.deletedOn,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="record.isDel != null">-->
+<!--        is_del = #{record.isDel,jdbcType=TINYINT},-->
+<!--      </if>-->
+<!--    </set>-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Update_By_Example_Where_Clause" />-->
+<!--    </if>-->
+<!--  </update>-->
+<!--  <update id="updateByExample" parameterType="map">-->
+<!--    update p_message-->
+<!--    set id = #{record.id,jdbcType=BIGINT},-->
+<!--      sender_user_id = #{record.senderUserId,jdbcType=BIGINT},-->
+<!--      receiver_user_id = #{record.receiverUserId,jdbcType=BIGINT},-->
+<!--      type = #{record.type,jdbcType=TINYINT},-->
+<!--      breif = #{record.breif,jdbcType=VARCHAR},-->
+<!--      content = #{record.content,jdbcType=VARCHAR},-->
+<!--      post_id = #{record.postId,jdbcType=BIGINT},-->
+<!--      comment_id = #{record.commentId,jdbcType=BIGINT},-->
+<!--      reply_id = #{record.replyId,jdbcType=BIGINT},-->
+<!--      is_read = #{record.isRead,jdbcType=TINYINT},-->
+<!--      created_on = #{record.createdOn,jdbcType=BIGINT},-->
+<!--      modified_on = #{record.modifiedOn,jdbcType=BIGINT},-->
+<!--      deleted_on = #{record.deletedOn,jdbcType=BIGINT},-->
+<!--      is_del = #{record.isDel,jdbcType=TINYINT}-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Update_By_Example_Where_Clause" />-->
+<!--    </if>-->
+<!--  </update>-->
+  <update id="updateByPrimaryKeySelective" parameterType="com.dlu.liyuxiang.pojo.Message">
+    update p_message
+    <set>
+      <if test="senderUserId != null">
+        sender_user_id = #{senderUserId,jdbcType=BIGINT},
+      </if>
+      <if test="receiverUserId != null">
+        receiver_user_id = #{receiverUserId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="breif != null">
+        breif = #{breif,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="postId != null">
+        post_id = #{postId,jdbcType=BIGINT},
+      </if>
+      <if test="commentId != null">
+        comment_id = #{commentId,jdbcType=BIGINT},
+      </if>
+      <if test="replyId != null">
+        reply_id = #{replyId,jdbcType=BIGINT},
+      </if>
+      <if test="isRead != null">
+        is_read = #{isRead,jdbcType=TINYINT},
+      </if>
+      <if test="createdOn != null">
+        created_on = #{createdOn,jdbcType=BIGINT},
+      </if>
+      <if test="modifiedOn != null">
+        modified_on = #{modifiedOn,jdbcType=BIGINT},
+      </if>
+      <if test="deletedOn != null">
+        deleted_on = #{deletedOn,jdbcType=BIGINT},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dlu.liyuxiang.pojo.Message">
+    update p_message
+    set sender_user_id = #{senderUserId,jdbcType=BIGINT},
+      receiver_user_id = #{receiverUserId,jdbcType=BIGINT},
+      type = #{type,jdbcType=TINYINT},
+      breif = #{breif,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      post_id = #{postId,jdbcType=BIGINT},
+      comment_id = #{commentId,jdbcType=BIGINT},
+      reply_id = #{replyId,jdbcType=BIGINT},
+      is_read = #{isRead,jdbcType=TINYINT},
+      created_on = #{createdOn,jdbcType=BIGINT},
+      modified_on = #{modifiedOn,jdbcType=BIGINT},
+      deleted_on = #{deletedOn,jdbcType=BIGINT},
+      is_del = #{isDel,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dlu.liyuxiang.dao.CaptchaMapper">
+  <resultMap id="BaseResultMap" type="com.dlu.liyuxiang.pojo.Captcha">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="captcha" jdbcType="VARCHAR" property="captcha" />
+    <result column="use_times" jdbcType="INTEGER" property="useTimes" />
+    <result column="expired_on" jdbcType="BIGINT" property="expiredOn" />
+    <result column="created_on" jdbcType="BIGINT" property="createdOn" />
+    <result column="modified_on" jdbcType="BIGINT" property="modifiedOn" />
+    <result column="deleted_on" jdbcType="BIGINT" property="deletedOn" />
+    <result column="is_del" jdbcType="TINYINT" property="isDel" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, phone, captcha, use_times, expired_on, created_on, modified_on, deleted_on, is_del
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from p_captcha
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from p_captcha
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dlu.liyuxiang.pojo.Captcha">
+    insert into p_captcha (id, phone, captcha, 
+      use_times, expired_on, created_on, 
+      modified_on, deleted_on, is_del
+      )
+    values (#{id,jdbcType=BIGINT}, #{phone,jdbcType=VARCHAR}, #{captcha,jdbcType=VARCHAR}, 
+      #{useTimes,jdbcType=INTEGER}, #{expiredOn,jdbcType=BIGINT}, #{createdOn,jdbcType=BIGINT}, 
+      #{modifiedOn,jdbcType=BIGINT}, #{deletedOn,jdbcType=BIGINT}, #{isDel,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dlu.liyuxiang.pojo.Captcha">
+    insert into p_captcha
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="captcha != null">
+        captcha,
+      </if>
+      <if test="useTimes != null">
+        use_times,
+      </if>
+      <if test="expiredOn != null">
+        expired_on,
+      </if>
+      <if test="createdOn != null">
+        created_on,
+      </if>
+      <if test="modifiedOn != null">
+        modified_on,
+      </if>
+      <if test="deletedOn != null">
+        deleted_on,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="captcha != null">
+        #{captcha,jdbcType=VARCHAR},
+      </if>
+      <if test="useTimes != null">
+        #{useTimes,jdbcType=INTEGER},
+      </if>
+      <if test="expiredOn != null">
+        #{expiredOn,jdbcType=BIGINT},
+      </if>
+      <if test="createdOn != null">
+        #{createdOn,jdbcType=BIGINT},
+      </if>
+      <if test="modifiedOn != null">
+        #{modifiedOn,jdbcType=BIGINT},
+      </if>
+      <if test="deletedOn != null">
+        #{deletedOn,jdbcType=BIGINT},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dlu.liyuxiang.pojo.Captcha">
+    update p_captcha
+    <set>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="captcha != null">
+        captcha = #{captcha,jdbcType=VARCHAR},
+      </if>
+      <if test="useTimes != null">
+        use_times = #{useTimes,jdbcType=INTEGER},
+      </if>
+      <if test="expiredOn != null">
+        expired_on = #{expiredOn,jdbcType=BIGINT},
+      </if>
+      <if test="createdOn != null">
+        created_on = #{createdOn,jdbcType=BIGINT},
+      </if>
+      <if test="modifiedOn != null">
+        modified_on = #{modifiedOn,jdbcType=BIGINT},
+      </if>
+      <if test="deletedOn != null">
+        deleted_on = #{deletedOn,jdbcType=BIGINT},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dlu.liyuxiang.pojo.Captcha">
+    update p_captcha
+    set phone = #{phone,jdbcType=VARCHAR},
+      captcha = #{captcha,jdbcType=VARCHAR},
+      use_times = #{useTimes,jdbcType=INTEGER},
+      expired_on = #{expiredOn,jdbcType=BIGINT},
+      created_on = #{createdOn,jdbcType=BIGINT},
+      modified_on = #{modifiedOn,jdbcType=BIGINT},
+      deleted_on = #{deletedOn,jdbcType=BIGINT},
+      is_del = #{isDel,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

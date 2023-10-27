@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dlu.liyuxiang.dao.PostMapper">
+  <resultMap id="BaseResultMap" type="com.dlu.liyuxiang.pojo.Post">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="comment_count" jdbcType="BIGINT" property="commentCount" />
+    <result column="collection_count" jdbcType="BIGINT" property="collectionCount" />
+    <result column="upvote_count" jdbcType="BIGINT" property="upvoteCount" />
+    <result column="is_top" jdbcType="TINYINT" property="isTop" />
+    <result column="is_essence" jdbcType="TINYINT" property="isEssence" />
+    <result column="is_lock" jdbcType="TINYINT" property="isLock" />
+    <result column="latest_replied_on" jdbcType="BIGINT" property="latestRepliedOn" />
+    <result column="tags" jdbcType="VARCHAR" property="tags" />
+    <result column="attachment_price" jdbcType="BIGINT" property="attachmentPrice" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="ip_loc" jdbcType="VARCHAR" property="ipLoc" />
+    <result column="created_on" jdbcType="BIGINT" property="createdOn" />
+    <result column="modified_on" jdbcType="BIGINT" property="modifiedOn" />
+    <result column="deleted_on" jdbcType="BIGINT" property="deletedOn" />
+    <result column="is_del" jdbcType="TINYINT" property="isDel" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, comment_count, collection_count, upvote_count, is_top, is_essence, is_lock, 
+    latest_replied_on, tags, attachment_price, ip, ip_loc, created_on, modified_on, deleted_on, 
+    is_del
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from p_post
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from p_post
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dlu.liyuxiang.pojo.Post">
+    insert into p_post (id, user_id, comment_count, 
+      collection_count, upvote_count, is_top, 
+      is_essence, is_lock, latest_replied_on, 
+      tags, attachment_price, ip, 
+      ip_loc, created_on, modified_on, 
+      deleted_on, is_del)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{commentCount,jdbcType=BIGINT}, 
+      #{collectionCount,jdbcType=BIGINT}, #{upvoteCount,jdbcType=BIGINT}, #{isTop,jdbcType=TINYINT}, 
+      #{isEssence,jdbcType=TINYINT}, #{isLock,jdbcType=TINYINT}, #{latestRepliedOn,jdbcType=BIGINT}, 
+      #{tags,jdbcType=VARCHAR}, #{attachmentPrice,jdbcType=BIGINT}, #{ip,jdbcType=VARCHAR}, 
+      #{ipLoc,jdbcType=VARCHAR}, #{createdOn,jdbcType=BIGINT}, #{modifiedOn,jdbcType=BIGINT}, 
+      #{deletedOn,jdbcType=BIGINT}, #{isDel,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dlu.liyuxiang.pojo.Post">
+    insert into p_post
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="commentCount != null">
+        comment_count,
+      </if>
+      <if test="collectionCount != null">
+        collection_count,
+      </if>
+      <if test="upvoteCount != null">
+        upvote_count,
+      </if>
+      <if test="isTop != null">
+        is_top,
+      </if>
+      <if test="isEssence != null">
+        is_essence,
+      </if>
+      <if test="isLock != null">
+        is_lock,
+      </if>
+      <if test="latestRepliedOn != null">
+        latest_replied_on,
+      </if>
+      <if test="tags != null">
+        tags,
+      </if>
+      <if test="attachmentPrice != null">
+        attachment_price,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="ipLoc != null">
+        ip_loc,
+      </if>
+      <if test="createdOn != null">
+        created_on,
+      </if>
+      <if test="modifiedOn != null">
+        modified_on,
+      </if>
+      <if test="deletedOn != null">
+        deleted_on,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="commentCount != null">
+        #{commentCount,jdbcType=BIGINT},
+      </if>
+      <if test="collectionCount != null">
+        #{collectionCount,jdbcType=BIGINT},
+      </if>
+      <if test="upvoteCount != null">
+        #{upvoteCount,jdbcType=BIGINT},
+      </if>
+      <if test="isTop != null">
+        #{isTop,jdbcType=TINYINT},
+      </if>
+      <if test="isEssence != null">
+        #{isEssence,jdbcType=TINYINT},
+      </if>
+      <if test="isLock != null">
+        #{isLock,jdbcType=TINYINT},
+      </if>
+      <if test="latestRepliedOn != null">
+        #{latestRepliedOn,jdbcType=BIGINT},
+      </if>
+      <if test="tags != null">
+        #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentPrice != null">
+        #{attachmentPrice,jdbcType=BIGINT},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="ipLoc != null">
+        #{ipLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="createdOn != null">
+        #{createdOn,jdbcType=BIGINT},
+      </if>
+      <if test="modifiedOn != null">
+        #{modifiedOn,jdbcType=BIGINT},
+      </if>
+      <if test="deletedOn != null">
+        #{deletedOn,jdbcType=BIGINT},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dlu.liyuxiang.pojo.Post">
+    update p_post
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="commentCount != null">
+        comment_count = #{commentCount,jdbcType=BIGINT},
+      </if>
+      <if test="collectionCount != null">
+        collection_count = #{collectionCount,jdbcType=BIGINT},
+      </if>
+      <if test="upvoteCount != null">
+        upvote_count = #{upvoteCount,jdbcType=BIGINT},
+      </if>
+      <if test="isTop != null">
+        is_top = #{isTop,jdbcType=TINYINT},
+      </if>
+      <if test="isEssence != null">
+        is_essence = #{isEssence,jdbcType=TINYINT},
+      </if>
+      <if test="isLock != null">
+        is_lock = #{isLock,jdbcType=TINYINT},
+      </if>
+      <if test="latestRepliedOn != null">
+        latest_replied_on = #{latestRepliedOn,jdbcType=BIGINT},
+      </if>
+      <if test="tags != null">
+        tags = #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentPrice != null">
+        attachment_price = #{attachmentPrice,jdbcType=BIGINT},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="ipLoc != null">
+        ip_loc = #{ipLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="createdOn != null">
+        created_on = #{createdOn,jdbcType=BIGINT},
+      </if>
+      <if test="modifiedOn != null">
+        modified_on = #{modifiedOn,jdbcType=BIGINT},
+      </if>
+      <if test="deletedOn != null">
+        deleted_on = #{deletedOn,jdbcType=BIGINT},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dlu.liyuxiang.pojo.Post">
+    update p_post
+    set user_id = #{userId,jdbcType=BIGINT},
+      comment_count = #{commentCount,jdbcType=BIGINT},
+      collection_count = #{collectionCount,jdbcType=BIGINT},
+      upvote_count = #{upvoteCount,jdbcType=BIGINT},
+      is_top = #{isTop,jdbcType=TINYINT},
+      is_essence = #{isEssence,jdbcType=TINYINT},
+      is_lock = #{isLock,jdbcType=TINYINT},
+      latest_replied_on = #{latestRepliedOn,jdbcType=BIGINT},
+      tags = #{tags,jdbcType=VARCHAR},
+      attachment_price = #{attachmentPrice,jdbcType=BIGINT},
+      ip = #{ip,jdbcType=VARCHAR},
+      ip_loc = #{ipLoc,jdbcType=VARCHAR},
+      created_on = #{createdOn,jdbcType=BIGINT},
+      modified_on = #{modifiedOn,jdbcType=BIGINT},
+      deleted_on = #{deletedOn,jdbcType=BIGINT},
+      is_del = #{isDel,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

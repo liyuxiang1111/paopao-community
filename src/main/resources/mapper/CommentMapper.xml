@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dlu.liyuxiang.dao.CommentMapper">
+  <resultMap id="BaseResultMap" type="com.dlu.liyuxiang.pojo.Comment">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="post_id" jdbcType="BIGINT" property="postId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="ip_loc" jdbcType="VARCHAR" property="ipLoc" />
+    <result column="created_on" jdbcType="BIGINT" property="createdOn" />
+    <result column="modified_on" jdbcType="BIGINT" property="modifiedOn" />
+    <result column="deleted_on" jdbcType="BIGINT" property="deletedOn" />
+    <result column="is_del" jdbcType="TINYINT" property="isDel" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, post_id, user_id, ip, ip_loc, created_on, modified_on, deleted_on, is_del
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from p_comment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from p_comment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dlu.liyuxiang.pojo.Comment">
+    insert into p_comment (id, post_id, user_id, 
+      ip, ip_loc, created_on, 
+      modified_on, deleted_on, is_del
+      )
+    values (#{id,jdbcType=BIGINT}, #{postId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{ip,jdbcType=VARCHAR}, #{ipLoc,jdbcType=VARCHAR}, #{createdOn,jdbcType=BIGINT}, 
+      #{modifiedOn,jdbcType=BIGINT}, #{deletedOn,jdbcType=BIGINT}, #{isDel,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dlu.liyuxiang.pojo.Comment">
+    insert into p_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="postId != null">
+        post_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="ipLoc != null">
+        ip_loc,
+      </if>
+      <if test="createdOn != null">
+        created_on,
+      </if>
+      <if test="modifiedOn != null">
+        modified_on,
+      </if>
+      <if test="deletedOn != null">
+        deleted_on,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="postId != null">
+        #{postId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="ipLoc != null">
+        #{ipLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="createdOn != null">
+        #{createdOn,jdbcType=BIGINT},
+      </if>
+      <if test="modifiedOn != null">
+        #{modifiedOn,jdbcType=BIGINT},
+      </if>
+      <if test="deletedOn != null">
+        #{deletedOn,jdbcType=BIGINT},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dlu.liyuxiang.pojo.Comment">
+    update p_comment
+    <set>
+      <if test="postId != null">
+        post_id = #{postId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="ipLoc != null">
+        ip_loc = #{ipLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="createdOn != null">
+        created_on = #{createdOn,jdbcType=BIGINT},
+      </if>
+      <if test="modifiedOn != null">
+        modified_on = #{modifiedOn,jdbcType=BIGINT},
+      </if>
+      <if test="deletedOn != null">
+        deleted_on = #{deletedOn,jdbcType=BIGINT},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dlu.liyuxiang.pojo.Comment">
+    update p_comment
+    set post_id = #{postId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      ip = #{ip,jdbcType=VARCHAR},
+      ip_loc = #{ipLoc,jdbcType=VARCHAR},
+      created_on = #{createdOn,jdbcType=BIGINT},
+      modified_on = #{modifiedOn,jdbcType=BIGINT},
+      deleted_on = #{deletedOn,jdbcType=BIGINT},
+      is_del = #{isDel,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
